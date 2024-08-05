@@ -21,9 +21,9 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-6 text-[#3B3C4A] items-center">
-            <a href="#home">Home</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
+            <a href="home">Home</a>
+            <a href="blog">Blog</a>
+            <a href="contact">Contact</a>
           </div>
           <div className="flex-1 text-[#3B3C4A] flex gap-4 text-xl">
             <FaFacebook />

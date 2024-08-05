@@ -13,9 +13,9 @@ const Header = () => {
           <span className="font-extrabold">Web</span>
         </div>
         <div className="flex gap-10">
-          <a href="#home">Home</a>
-          <a href="#blog">Blog</a>
-          <a href="#contact">Contact</a>
+          <a href="home">Home</a>
+          <a href="blog">Blog</a>
+          <a href="contact">Contact</a>
         </div>
         <div className="bg-[#F4F4F5] flex items-center p-2 rounded-md">
           <input placeholder="Search" className="bg-[#F4F4F5]" type="text" />
