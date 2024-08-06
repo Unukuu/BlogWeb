@@ -13,7 +13,7 @@ const Header = () => {
           <span className="font-extrabold">Web</span>
         </div>
         <div className="flex gap-10">
-          <a href="home">Home</a>
+          <a href="/">Home</a>
           <a href="blog">Blog</a>
           <a href="contact">Contact</a>
         </div>
