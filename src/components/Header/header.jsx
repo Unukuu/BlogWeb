@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 const Header = () => {
   return (
@@ -13,12 +14,17 @@ const Header = () => {
           <span className="font-extrabold">Web</span>
         </div>
         <div className="flex gap-10">
-          <a href="/">Home</a>
-          <a href="blogall">Blog</a>
-          <a href="contact">Contact</a>
+          <Link href={"/"}>Home</Link>
+          <Link href={"/blogall"}>Blog</Link>
+          <Link href={"/contact"}>Contact</Link>
         </div>
         <div className="bg-[#F4F4F5] flex items-center p-2 rounded-md">
-          <input placeholder="Search" className="bg-[#F4F4F5]" type="text" />
+          <input
+            onChange={() => {}}
+            placeholder="Search"
+            className="bg-[#F4F4F5]"
+            type="text"
+          />
           <FaSearch />
         </div>
       </header>
