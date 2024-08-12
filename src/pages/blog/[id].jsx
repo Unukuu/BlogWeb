@@ -13,7 +13,6 @@ const Blogdetail = () => {
   useEffect(() => {
     getArticleDetail(query.id);
   }, []);
-
   return (
     <div className="container m-auto">
       <div dangerouslySetInnerHTML={{ __html: articledetail?.body_html }}></div>

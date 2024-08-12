@@ -1,8 +1,10 @@
 import Allblogs from "@/components/content/allblogs";
+import { SearchContext } from "@/provider/search-provider";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const Blogall = () => {
+  const { searchValue } = useContext(SearchContext);
   const [articles, setArticles] = useState([]);
   const [count, setCount] = useState(0);
   const getArticleData = async () => {
@@ -16,10 +18,14 @@ const Blogall = () => {
     getArticleData();
   }, [count]);
 
+  const findPost = articles?.filter((article) =>
+    article?.title?.toLowerCase().includes(searchValue.toLowerCase())
+  );
   return (
     <>
+      <h1 className="text-9xl">search:{searchValue}</h1>
       <div className="container m-auto grid grid-cols-3 gap-5">
-        {articles.map((data) => {
+        {findPost?.map((data) => {
           return (
             <Link href={"/blog/" + data.id}>
               <div className="p-4 flex flex-col gap-4 border rounded-xl">
