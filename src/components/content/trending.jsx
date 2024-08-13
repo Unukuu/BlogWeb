@@ -1,27 +1,6 @@
 import Label from "./label";
 
-const datatrend = [
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "/images/mountain.png",
-    labeltxt: "Technology",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "/images/worksetup.png",
-    labeltxt: "Technology",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "/images/micwoman.png",
-    labeltxt: "Technology",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "/images/team.png",
-    labeltxt: "Technology",
-  },
-];
+const datatrend = [];
 
 const Trending = () => {
   return (

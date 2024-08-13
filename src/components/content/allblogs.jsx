@@ -1,62 +1,20 @@
+import { useEffect, useState } from "react";
 import Label from "./label";
 
-const dataallblogs = [
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs1.jpeg",
-    label: "Technology",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs2.jpeg",
-    label: "Software",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs3.jpeg",
-    label: "Design",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs4.jpeg",
-    label: "Technology",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs5.jpeg",
-    label: "Software",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs6.jpeg",
-    label: "Design",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs7.jpeg",
-    label: "Technology",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs8.jpeg",
-    label: "Software",
-    date: "August 20, 2022",
-  },
-  {
-    text: "The Impact of Technology on the Workplace: How Technology is Changing",
-    img: "./images/blogs9.jpeg",
-    label: "Design",
-    date: "August 20, 2022",
-  },
-];
 const Allblogs = () => {
+  const [dataallblogs, setDataallblogs] = useState([]);
+  const [count, setCount] = useState(9);
+  const getDataHome = async () => {
+    const respo = await fetch(
+      `https://dev.to/api/articles?page=1&per_page=${count}`
+    );
+    const data = await respo.json();
+    setDataallblogs(data);
+  };
+  useEffect(() => {
+    getDataHome();
+  }, [count]);
+  console.log(dataallblogs);
   return (
     <div className="container m-auto flex flex-col gap-8 mb-24">
       <h1 className="text-2xl font-bold text-black font-sans">All blog post</h1>
@@ -77,26 +35,32 @@ const Allblogs = () => {
             <div className="p-4 flex flex-col gap-4 border rounded-xl">
               <img
                 className="h-[360px] w-[100%] object-center object-cover rounded-xl"
-                src={data.img}
-                alt=""
+                src={
+                  data.cover_image === null
+                    ? data.social_image
+                    : data.cover_image
+                }
+                alt="photo empty"
               />
 
               <div>
                 <span className="py-1 px-3 bg-[#4B6BFB0D] rounded-md text-[#4B6BFB] text-xs">
-                  {data.label}
+                  {data.user.name}
                 </span>
               </div>
-              <p className="text-2xl font-semibold">
-                The Impact of Technology on the Workplace: How Technology is
-                Changing
-              </p>
-              <p className="text-[#97989F]">{data.date}</p>
+              <p className="text-2xl font-semibold">{data.title}</p>
+              <p className="text-[#97989F]">{data.readable_publish_date}</p>
             </div>
           );
         })}
       </div>
       <div className="text-center">
-        <button className=" border text-[#696A75] py-3 px-5 rounded-xl">
+        <button
+          onClick={() => {
+            setCount(count + 3);
+          }}
+          className=" border text-[#696A75] py-3 px-5 rounded-xl"
+        >
           Load More
         </button>
       </div>
