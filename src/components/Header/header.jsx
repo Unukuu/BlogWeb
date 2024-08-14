@@ -1,9 +1,9 @@
-import { SearchContext } from "@/provider/search-provider";
+import { MyContext } from "@/provider/myprovider";
 import Link from "next/link";
 import { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 const Header = () => {
-  const { setSearchValue } = useContext(SearchContext);
+  const { setSearchValue } = useContext(MyContext);
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
