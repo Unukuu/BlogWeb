@@ -32,7 +32,6 @@ const Blogall = () => {
   );
   return (
     <>
-      <h1 className="text-9xl">search:{searchValue}</h1>
       {isLoading ? (
         <div className="items-center justify-center flex">
           <Loader />
