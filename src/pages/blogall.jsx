@@ -33,11 +33,13 @@ const Blogall = () => {
   return (
     <>
       <h1 className="text-9xl">search:{searchValue}</h1>
-      <div className="container m-auto grid grid-cols-3 gap-5">
-        {isLoading ? (
+      {isLoading ? (
+        <div className="items-center justify-center flex">
           <Loader />
-        ) : (
-          findPost?.map((data) => {
+        </div>
+      ) : (
+        <div className="container m-auto grid grid-cols-3 gap-5">
+          {findPost?.map((data) => {
             return (
               <Link href={"/blog/" + data.id}>
                 <div className="p-4 flex flex-col gap-4 border rounded-xl">
@@ -57,9 +59,9 @@ const Blogall = () => {
                 </div>
               </Link>
             );
-          })
-        )}
-      </div>
+          })}
+        </div>
+      )}
       <div className="text-center mt-7 mb-24">
         <button
           onClick={() => {
