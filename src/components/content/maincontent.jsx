@@ -16,13 +16,18 @@ const Maincontent = () => {
   return (
     <>
       <div
-        className="overflow-hidden
+        className=" overflow-hidden
        flex container m-auto rounded-xl shadow-2xl"
       >
         {maincontentData?.map((data) => {
           return (
             <div
-              className={`transition-all duration-500 ease-in-out translate-x-[-${count}00%]`}
+              style={{
+                transition: "all",
+                transitionDuration: "0.7s",
+                transitionTimingFunction: "ease-in-out",
+                transform: `translate(-${count}00%,0)`,
+              }}
             >
               <div
                 style={{
