@@ -1,7 +1,8 @@
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import Label from "./label";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 const Maincontent = () => {
   const [count, setCount] = useState(0);
   const [maincontentData, setMaincontentData] = useState([]);
@@ -13,27 +14,26 @@ const Maincontent = () => {
   useEffect(() => {
     getMaincontentdata();
   }, []);
+  const [emblaRef, emblaApi] = useEmblaCarousel();
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
   return (
     <>
-      <div
-        className=" overflow-hidden
-       flex container m-auto rounded-xl shadow-2xl"
-      >
+      <div className="container m-auto flex overflow-hidden rounded-2xl">
         {maincontentData?.map((data) => {
           return (
-            <div
-              style={{
-                transition: "all",
-                transitionDuration: "0.7s",
-                transitionTimingFunction: "ease-in-out",
-                transform: `translate(-${count}00%,0)`,
-              }}
-            >
+            <div>
               <div
                 style={{
                   background: `url(${data?.social_image})`,
                 }}
-                className={`container m-auto h-[651px] bg-[rgba(0,0,0,0.4)] w-[1600px] bg-blend-darken bg-cover bg-center p-3 flex items-end`}
+                className={`container m-auto h-[830px] w-[1600px] bg-[rgba(0,0,0,0.4)] bg-blend-darken bg-cover bg-center p-3 flex items-end`}
               >
                 <div className="shadow-2xl h-[50%] w-[50%] bg-white rounded-xl p-10 border">
                   <Label text={data?.user?.username} />
@@ -47,30 +47,9 @@ const Maincontent = () => {
           );
         })}
       </div>
-
-      <div className="flex gap-2 container m-auto justify-end mt-3">
-        <button
-          onClick={() => {
-            setCount(count - 1);
-            if (count <= 0) {
-              setCount(4);
-            }
-          }}
-          className="border border-black p-4 rounded"
-        >
-          <GrPrevious />
-        </button>
-        <button
-          onClick={() => {
-            setCount(count + 1);
-            if (count >= 4) {
-              setCount(0);
-            }
-          }}
-          className="border border-black p-4 rounded"
-        >
-          <GrNext />
-        </button>
+      <div className="container m-auto flex justify-between mt-3">
+        <button className="border p-5">PREVIOUS</button>
+        <button className="border p-5">NEXT</button>
       </div>
     </>
   );
