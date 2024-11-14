@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
-import Label from "./label";
-
+import { useContext, useEffect, useState } from "react";
+import { MyContext } from "@/provider/myprovider";
+import Loader from "@/components/loader";
 const Allblogs = () => {
+  const { searchValue, setIsLoading, isLoading } = useContext(MyContext);
   const [dataallblogs, setDataallblogs] = useState([]);
-  const [count, setCount] = useState(9);
+  const [dataArr, setDataArr] = useState([]);
+  const [count, setCount] = useState(3);
   const getDataHome = async () => {
+    setIsLoading(true);
     const respo = await fetch(
       `https://dev.to/api/articles?page=1&per_page=${count}`
     );
     const data = await respo.json();
     setDataallblogs(data);
+
+    setIsLoading(false);
   };
   useEffect(() => {
     getDataHome();
@@ -29,31 +34,38 @@ const Allblogs = () => {
         </div>
         <a href="">View All</a>
       </nav>
-      <div className="grid grid-cols-3 gap-5">
-        {dataallblogs.map((data) => {
-          return (
-            <div className="p-4 flex flex-col gap-4 border rounded-xl">
-              <img
-                className="h-[360px] w-[100%] object-center object-cover rounded-xl"
-                src={
-                  data.cover_image === null
-                    ? data.social_image
-                    : data.cover_image
-                }
-                alt="photo empty"
-              />
+      {isLoading ? (
+        <div className="flex justify-center items-center">
+          <Loader />
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-5">
+          {dataallblogs.map((data) => {
+            return (
+              <div className="p-4 flex flex-col gap-4 border rounded-xl">
+                <img
+                  className="h-[360px] w-[100%] object-center object-cover rounded-xl"
+                  src={
+                    data.cover_image === null
+                      ? data.social_image
+                      : data.cover_image
+                  }
+                  alt="photo empty"
+                />
 
-              <div>
-                <span className="py-1 px-3 bg-[#4B6BFB0D] rounded-md text-[#4B6BFB] text-xs">
-                  {data.user.name}
-                </span>
+                <div>
+                  <span className="py-1 px-3 bg-[#4B6BFB0D] rounded-md text-[#4B6BFB] text-xs">
+                    {data.user.name}
+                  </span>
+                </div>
+                <p className="text-2xl font-semibold">{data.title}</p>
+                <p className="text-[#97989F]">{data.readable_publish_date}</p>
               </div>
-              <p className="text-2xl font-semibold">{data.title}</p>
-              <p className="text-[#97989F]">{data.readable_publish_date}</p>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
+
       <div className="text-center">
         <button
           onClick={() => {

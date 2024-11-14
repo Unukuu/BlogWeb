@@ -22,7 +22,6 @@ const Header = () => {
         <div className="flex gap-10">
           <Link href={"/"}>Home</Link>
           <Link href={"/blogall"}>Blog</Link>
-          <Link href={"/contact"}>Contact</Link>
         </div>
         <div className="bg-[#F4F4F5] flex items-center p-2 rounded-md">
           <input

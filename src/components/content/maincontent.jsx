@@ -2,9 +2,8 @@ import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import Label from "./label";
 import { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
 const Maincontent = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(4);
   const [maincontentData, setMaincontentData] = useState([]);
   const getMaincontentdata = async () => {
     const respo = await fetch(`https://dev.to/api/articles?page=1&per_page=5`);
@@ -14,21 +13,14 @@ const Maincontent = () => {
   useEffect(() => {
     getMaincontentdata();
   }, []);
-  const [emblaRef, emblaApi] = useEmblaCarousel();
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
   return (
     <>
-      <div className="container m-auto flex overflow-hidden rounded-2xl">
+      <div className="container m-auto flex overflow-hidden rounded-2xl ">
         {maincontentData?.map((data) => {
           return (
-            <div>
+            <div
+              className={`duration-300 ease-in-out -translate-x-[${count}00%]`}
+            >
               <div
                 style={{
                   background: `url(${data?.social_image})`,
@@ -48,8 +40,30 @@ const Maincontent = () => {
         })}
       </div>
       <div className="container m-auto flex justify-between mt-3">
-        <button className="border p-5">PREVIOUS</button>
-        <button className="border p-5">NEXT</button>
+        <button
+          onClick={() => {
+            if (count < 1) {
+              setCount(4);
+            } else {
+              setCount(count - 1);
+            }
+          }}
+          className="border p-5"
+        >
+          PREVIOUS
+        </button>
+        <button
+          onClick={() => {
+            if (count > 3) {
+              setCount(0);
+            } else {
+              setCount(count + 1);
+            }
+          }}
+          className="border p-5"
+        >
+          NEXT
+        </button>
       </div>
     </>
   );
